@@ -157,7 +157,7 @@ const AddPet = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/pets", pet);
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/pets`, pet);
       alert("Pet added successfully!");
       navigate("/");
     } catch (error) {
@@ -273,7 +273,7 @@ const PetList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/pets")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/pets`)
       .then((response) => setPets(response.data))
       .catch((error) => console.error("Error fetching pets:", error));
   }, []);
@@ -385,7 +385,7 @@ const PetDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/pets/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/pets/${id}`)
       .then((response) => setPet(response.data))
       .catch((error) => console.error("Error fetching pet details:", error));
   }, [id]);
@@ -393,7 +393,7 @@ const PetDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/applications", {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/applications`, {
         ...form,
         petId: id,
       })
@@ -506,7 +506,7 @@ const ApplicationDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/applications/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/applications/${id}`)
       .then((response) => {
         setApplication(response.data);
         setLoading(false);
