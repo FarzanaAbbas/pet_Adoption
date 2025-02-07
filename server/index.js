@@ -13,7 +13,11 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "https://pet-adoption-frontend-eyfb.onrender.com", // Your frontend URL
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization"
+}));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URL, {
@@ -156,5 +160,6 @@ app.post("/applications", async (req, res) => {
 
 
 // Start Server
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
